@@ -3,18 +3,24 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 47;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		1412445E1B651DD600D8F100 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1412445D1B651DD600D8F100 /* AppDelegate.swift */; };
-		141244601B651DD600D8F100 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1412445F1B651DD600D8F100 /* ViewController.swift */; };
 		141244631B651DD600D8F100 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 141244611B651DD600D8F100 /* Main.storyboard */; };
-		141244661B651DD600D8F100 /* Burmese_News.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 141244641B651DD600D8F100 /* Burmese_News.xcdatamodeld */; };
 		141244681B651DD600D8F100 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 141244671B651DD600D8F100 /* Assets.xcassets */; };
 		1412446B1B651DD600D8F100 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 141244691B651DD600D8F100 /* LaunchScreen.storyboard */; };
 		141244761B651DD600D8F100 /* Burmese_NewsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141244751B651DD600D8F100 /* Burmese_NewsTests.swift */; };
 		141244811B651DD600D8F100 /* Burmese_NewsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141244801B651DD600D8F100 /* Burmese_NewsUITests.swift */; };
+		1412448F1B651EAD00D8F100 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1412448E1B651EAD00D8F100 /* TableViewController.swift */; };
+		142556F51B7B7B7D00F2F99A /* ZawgyiOne2008.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 142556F41B7B7B7D00F2F99A /* ZawgyiOne2008.ttf */; };
+		14641DD91B6621EC0069EA58 /* XmlParserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14641DD81B6621EC0069EA58 /* XmlParserManager.swift */; };
+		14641DDB1B662A620069EA58 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14641DDA1B662A620069EA58 /* WebViewController.swift */; };
+		1465DFE31BC381B0000DF505 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1465DFE21BC381B0000DF505 /* SettingTableViewController.swift */; };
+		1479C8551BB841E80097E078 /* CAGradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1479C8541BB841E80097E078 /* CAGradientLayer.swift */; };
+		14B467751B674E2300138211 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B467741B674E2300138211 /* PageViewController.swift */; };
+		14B467771B6758E800138211 /* ChannelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B467761B6758E800138211 /* ChannelTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,9 +43,7 @@
 /* Begin PBXFileReference section */
 		1412445A1B651DD600D8F100 /* Burmese News.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Burmese News.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1412445D1B651DD600D8F100 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1412445F1B651DD600D8F100 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		141244621B651DD600D8F100 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		141244651B651DD600D8F100 /* Burmese_News.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Burmese_News.xcdatamodel; sourceTree = "<group>"; };
 		141244671B651DD600D8F100 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1412446A1B651DD600D8F100 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1412446C1B651DD600D8F100 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +53,14 @@
 		1412447C1B651DD600D8F100 /* Burmese NewsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Burmese NewsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		141244801B651DD600D8F100 /* Burmese_NewsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Burmese_NewsUITests.swift; sourceTree = "<group>"; };
 		141244821B651DD600D8F100 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1412448E1B651EAD00D8F100 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		142556F41B7B7B7D00F2F99A /* ZawgyiOne2008.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ZawgyiOne2008.ttf; sourceTree = "<group>"; };
+		14641DD81B6621EC0069EA58 /* XmlParserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XmlParserManager.swift; sourceTree = "<group>"; };
+		14641DDA1B662A620069EA58 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		1465DFE21BC381B0000DF505 /* SettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
+		1479C8541BB841E80097E078 /* CAGradientLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAGradientLayer.swift; sourceTree = "<group>"; };
+		14B467741B674E2300138211 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		14B467761B6758E800138211 /* ChannelTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,13 +111,15 @@
 		1412445C1B651DD600D8F100 /* Burmese News */ = {
 			isa = PBXGroup;
 			children = (
-				1412445D1B651DD600D8F100 /* AppDelegate.swift */,
-				1412445F1B651DD600D8F100 /* ViewController.swift */,
 				141244611B651DD600D8F100 /* Main.storyboard */,
-				141244671B651DD600D8F100 /* Assets.xcassets */,
-				141244691B651DD600D8F100 /* LaunchScreen.storyboard */,
-				1412446C1B651DD600D8F100 /* Info.plist */,
-				141244641B651DD600D8F100 /* Burmese_News.xcdatamodeld */,
+				14B467761B6758E800138211 /* ChannelTableViewController.swift */,
+				1412448E1B651EAD00D8F100 /* TableViewController.swift */,
+				14B467741B674E2300138211 /* PageViewController.swift */,
+				14641DDA1B662A620069EA58 /* WebViewController.swift */,
+				14641DD81B6621EC0069EA58 /* XmlParserManager.swift */,
+				1479C8541BB841E80097E078 /* CAGradientLayer.swift */,
+				1465DFE21BC381B0000DF505 /* SettingTableViewController.swift */,
+				141244901B651FA500D8F100 /* Supporting Files */,
 			);
 			path = "Burmese News";
 			sourceTree = "<group>";
@@ -126,6 +140,18 @@
 				141244821B651DD600D8F100 /* Info.plist */,
 			);
 			path = "Burmese NewsUITests";
+			sourceTree = "<group>";
+		};
+		141244901B651FA500D8F100 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				142556F41B7B7B7D00F2F99A /* ZawgyiOne2008.ttf */,
+				1412445D1B651DD600D8F100 /* AppDelegate.swift */,
+				141244671B651DD600D8F100 /* Assets.xcassets */,
+				141244691B651DD600D8F100 /* LaunchScreen.storyboard */,
+				1412446C1B651DD600D8F100 /* Info.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,6 +221,7 @@
 				TargetAttributes = {
 					141244591B651DD600D8F100 = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = EU2GQT9HEF;
 					};
 					141244701B651DD600D8F100 = {
 						CreatedOnToolsVersion = 7.0;
@@ -207,7 +234,7 @@
 				};
 			};
 			buildConfigurationList = 141244551B651DD600D8F100 /* Build configuration list for PBXProject "Burmese News" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 6.3";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -231,6 +258,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				142556F51B7B7B7D00F2F99A /* ZawgyiOne2008.ttf in Resources */,
 				1412446B1B651DD600D8F100 /* LaunchScreen.storyboard in Resources */,
 				141244681B651DD600D8F100 /* Assets.xcassets in Resources */,
 				141244631B651DD600D8F100 /* Main.storyboard in Resources */,
@@ -258,9 +286,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				141244661B651DD600D8F100 /* Burmese_News.xcdatamodeld in Sources */,
-				141244601B651DD600D8F100 /* ViewController.swift in Sources */,
+				1465DFE31BC381B0000DF505 /* SettingTableViewController.swift in Sources */,
+				14641DDB1B662A620069EA58 /* WebViewController.swift in Sources */,
+				1479C8551BB841E80097E078 /* CAGradientLayer.swift in Sources */,
+				1412448F1B651EAD00D8F100 /* TableViewController.swift in Sources */,
+				14B467751B674E2300138211 /* PageViewController.swift in Sources */,
 				1412445E1B651DD600D8F100 /* AppDelegate.swift in Sources */,
+				14641DD91B6621EC0069EA58 /* XmlParserManager.swift in Sources */,
+				14B467771B6758E800138211 /* ChannelTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +365,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -354,6 +388,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -377,6 +412,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -392,6 +428,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -402,10 +439,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				INFOPLIST_FILE = "Burmese News/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Origami-Inc.Burmese-News";
+				PRODUCT_BUNDLE_IDENTIFIER = com.khantzawko.burmesenews;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos;
+				"SDKROOT[arch=*]" = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -413,10 +457,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				INFOPLIST_FILE = "Burmese News/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Origami-Inc.Burmese-News";
+				PRODUCT_BUNDLE_IDENTIFIER = com.khantzawko.burmesenews;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -487,6 +537,7 @@
 				141244871B651DD600D8F100 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		141244881B651DD600D8F100 /* Build configuration list for PBXNativeTarget "Burmese NewsTests" */ = {
 			isa = XCConfigurationList;
@@ -495,6 +546,7 @@
 				1412448A1B651DD600D8F100 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1412448B1B651DD600D8F100 /* Build configuration list for PBXNativeTarget "Burmese NewsUITests" */ = {
 			isa = XCConfigurationList;
@@ -503,21 +555,9 @@
 				1412448D1B651DD600D8F100 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		141244641B651DD600D8F100 /* Burmese_News.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				141244651B651DD600D8F100 /* Burmese_News.xcdatamodel */,
-			);
-			currentVersion = 141244651B651DD600D8F100 /* Burmese_News.xcdatamodel */;
-			path = Burmese_News.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 141244521B651DD600D8F100 /* Project object */;
 }
