@@ -23,8 +23,6 @@ extension CAGradientLayer {
         gradientLayer.locations = gradientLocations
         
         return gradientLayer
-        
     }
-
 }
 

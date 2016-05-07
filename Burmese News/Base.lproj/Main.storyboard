@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D9c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="shO-LI-HWR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="shO-LI-HWR">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -30,7 +30,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wxs-wy-zGb">
                                                     <rect key="frame" x="18" y="104" width="564" height="16"/>
                                                     <attributedString key="attributedText">
-                                                        <fragment content="Burmese News (version 1.0.1)">
+                                                        <fragment content="Burmese News (version 1.0.2)">
                                                             <attributes>
                                                                 <color key="NSColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <font key="NSFont" size="16" name="Courier"/>
@@ -119,6 +119,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="separatorColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <sections>
                             <tableViewSection headerTitle="General" footerTitle="" id="y75-RZ-y5w">
                                 <cells>
@@ -217,7 +218,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="News" id="3if-o8-2DF">
-                        <barButtonItem key="leftBarButtonItem" title="Settings" id="7tm-5Q-oFC">
+                        <barButtonItem key="leftBarButtonItem" image="SettingIcon" id="7tm-5Q-oFC">
                             <connections>
                                 <segue destination="VeS-7r-3op" kind="show" identifier="ForSetting" id="co2-XM-b0K"/>
                             </connections>
@@ -327,19 +328,7 @@
                     <view key="view" contentMode="scaleToFill" id="c7T-Vr-cxq">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mvE-Yj-WYL">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </webView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="mvE-Yj-WYL" firstAttribute="leading" secondItem="c7T-Vr-cxq" secondAttribute="leadingMargin" constant="-20" id="Gna-hc-2C7"/>
-                            <constraint firstItem="Jad-x0-kGJ" firstAttribute="top" secondItem="mvE-Yj-WYL" secondAttribute="bottom" id="aXP-Jr-b7r"/>
-                            <constraint firstItem="mvE-Yj-WYL" firstAttribute="top" secondItem="L2X-yE-49T" secondAttribute="bottom" constant="-64" id="cEM-VF-G5Y"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="mvE-Yj-WYL" secondAttribute="trailing" constant="-20" id="eoR-76-MWY"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="dTK-vN-yCb">
                         <barButtonItem key="rightBarButtonItem" systemItem="action" id="R3x-6p-p8J">
@@ -349,9 +338,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                    <connections>
-                        <outlet property="myWebView" destination="mvE-Yj-WYL" id="0rR-t1-5AD"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hIK-TJ-rdn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -368,24 +354,9 @@
                     <view key="view" contentMode="scaleToFill" id="OAs-B1-5vP">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ahd-jJ-LC3">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </webView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="Ahd-jJ-LC3" firstAttribute="leading" secondItem="OAs-B1-5vP" secondAttribute="leadingMargin" constant="-20" id="8uP-bS-PLK"/>
-                            <constraint firstItem="Ahd-jJ-LC3" firstAttribute="top" secondItem="v9v-Yq-KEg" secondAttribute="bottom" constant="-64" id="GmV-YG-esg"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Ahd-jJ-LC3" secondAttribute="trailing" constant="-20" id="X2g-WS-XXf"/>
-                            <constraint firstItem="vFS-KA-Jos" firstAttribute="top" secondItem="Ahd-jJ-LC3" secondAttribute="bottom" id="grn-m8-1YZ"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Web Page" id="pGO-7c-kVf"/>
-                    <connections>
-                        <outlet property="myWebView" destination="Ahd-jJ-LC3" id="wDN-IF-ySS"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yl1-cu-Axh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -413,5 +384,6 @@
     </scenes>
     <resources>
         <image name="Image" width="76" height="76"/>
+        <image name="SettingIcon" width="22" height="22"/>
     </resources>
 </document>

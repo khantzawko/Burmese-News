@@ -10,8 +10,9 @@ import UIKit
 
 class PageViewController: UIViewController, UIWebViewDelegate {
     
+    //@IBOutlet weak var myWebView: UIWebView!
     
-    @IBOutlet weak var myWebView: UIWebView!
+    var webView: UIWebView!
     
     var selectedFeedTitle = String()
     var selectedFeedContent = String()
@@ -35,23 +36,42 @@ class PageViewController: UIViewController, UIWebViewDelegate {
         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
     }
     
+    override func viewWillAppear(animated: Bool) {
+        let name = selectedChannelName
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: name)
+        
+        let builder = GAIDictionaryBuilder.createScreenView()
+        tracker.send(builder.build() as [NSObject : AnyObject])
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        webView = UIWebView(frame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height))
+        self.view = self.webView
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
                 
             let feedContent:String
 
             self.selectedFeedImage = self.selectedFeedImage.stringByReplacingOccurrencesOfString("\n", withString: "")
-
-            if self.selectedChannelName == "The Irrawaddy"{
+            
+            if self.selectedChannelName == "7 Day News"{
+                self.selectedFeedPubDate = self.selectedFeedPubDate.stringByReplacingOccurrencesOfString(" +0000", withString: "")
+                
+                self.selectedFeedPubDate = self.formatDateFromString("EEE, dd MMM yyyy HH:mm:ss", dateToString: self.selectedFeedPubDate)
+                feedContent = "<style> .date {color: dimgrey; font-size: 90%} body {margin-left: 9px; margin-right: 9px;}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">Posted on: \(self.selectedFeedPubDate)</p> <img src = \(self.selectedFeedImage) width = 100%> <br> <br> \(self.selectedFeedContent)"
+                
+                
+            } else if self.selectedChannelName == "The Irrawaddy"{
                 
                 self.selectedFeedPubDate = self.selectedFeedPubDate.stringByReplacingOccurrencesOfString(" +0000", withString: "Z")
                 self.selectedFeedPubDate = self.formatDateFromString("EEE, dd MMM yyyy HH:mm:ssZ", dateToString: self.selectedFeedPubDate)
                 var changeImageSize: String = self.selectedFeedIrrwaddyContent.stringByReplacingOccurrencesOfString("620px", withString: "100%")
                 changeImageSize = changeImageSize.stringByReplacingOccurrencesOfString("610", withString: "100%")
                 changeImageSize = changeImageSize.stringByReplacingOccurrencesOfString("height", withString: " ")
-                feedContent = "<style> .date {color: dimgrey; font-size: 90%}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">Posted on: \(self.selectedFeedPubDate)</p>\(changeImageSize)"
+                feedContent = "<style> .date {color: dimgrey; font-size: 90%} body {margin-left: 9px; margin-right: 9px;}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">Posted on: \(self.selectedFeedPubDate)</p>\(changeImageSize)"
                 
             } else if self.selectedChannelName == "DVB" {
                 
@@ -59,7 +79,7 @@ class PageViewController: UIViewController, UIWebViewDelegate {
                 self.selectedFeedPubDate = self.formatDateFromString("EEE, dd MMM yyyy HH:mm:ssZ", dateToString: self.selectedFeedPubDate)
                 self.selectedFeedIrrwaddyContent = self.selectedFeedIrrwaddyContent.stringByReplacingOccurrencesOfString("width", withString: "width = 100%")
                 self.selectedFeedIrrwaddyContent = self.selectedFeedIrrwaddyContent.stringByReplacingOccurrencesOfString("height", withString: " ")
-                feedContent = "<style> .date {color: dimgrey; font-size: 90%}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">Posted on: \(self.selectedFeedPubDate)</p> \(self.selectedFeedIrrwaddyContent)"
+                feedContent = "<style> .date {color: dimgrey; font-size: 90%} body {margin-left: 9px; margin-right: 9px;}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">Posted on: \(self.selectedFeedPubDate)</p> \(self.selectedFeedIrrwaddyContent)"
                 
                 
             } else if self.selectedChannelName == "Radio Free Asia (RFA)" {
@@ -67,14 +87,14 @@ class PageViewController: UIViewController, UIWebViewDelegate {
                 self.selectedFeedPubDate = self.selectedFeedPubDate.stringByReplacingOccurrencesOfString("T", withString: " ")
                 self.selectedFeedPubDate = self.formatDateFromString("yyyy-MM-dd HH:mm:ssZ", dateToString: self.selectedFeedPubDate)
                 self.selectedFeedIrrwaddyContent = self.selectedFeedIrrwaddyContent.stringByReplacingOccurrencesOfString("img", withString: "img width = 100%")
-                feedContent = "<style> .date {color: dimgrey; font-size: 90%}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">Posted on: \(self.selectedFeedPubDate)</p> \(self.selectedFeedIrrwaddyContent)"
+                feedContent = "<style> .date {color: dimgrey; font-size: 90%} body {margin-left: 9px; margin-right: 9px;}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">Posted on: \(self.selectedFeedPubDate)</p> \(self.selectedFeedIrrwaddyContent)"
                 
             } else if self.selectedChannelName == "Voice of America (VOA)" {
                 
                 self.selectedFeedPubDate = self.selectedFeedPubDate.stringByReplacingOccurrencesOfString(" +0630", withString: "")
                 
                 self.selectedFeedPubDate = self.formatDateFromString("EEE, dd MMM yyyy HH:mm:ss", dateToString: self.selectedFeedPubDate)
-                feedContent = "<style> .date {color: dimgrey; font-size: 90%}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">Posted on: \(self.selectedFeedPubDate)</p> <img src = \(self.selectedFeedImage) width = 100%> <br> <br> \(self.selectedFeedContent)"
+                feedContent = "<style> .date {color: dimgrey; font-size: 90%} body {margin-left: 9px; margin-right: 9px;}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">Posted on: \(self.selectedFeedPubDate)</p> <img src = \(self.selectedFeedImage) width = 100%> <br> <br> \(self.selectedFeedContent)"
                 
             } else if self.selectedChannelName == "Panglong" {
                 
@@ -86,7 +106,7 @@ class PageViewController: UIViewController, UIWebViewDelegate {
                 self.selectedFeedContent = self.selectedFeedContent.stringByReplacingOccurrencesOfString("width", withString: "width = 100%")
                 self.selectedFeedContent = self.selectedFeedContent.stringByReplacingOccurrencesOfString("height", withString: " ")
                 self.selectedFeedContent = self.selectedFeedContent.stringByReplacingOccurrencesOfString("img", withString: "img width = 100%")
-                feedContent = "<style> .date {color: dimgrey; font-size: 90%}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">Posted on: \(self.selectedFeedPubDate)</p> \(self.selectedFeedContent)"
+                feedContent = "<style> .date {color: dimgrey; font-size: 90%} body {margin-left: 9px; margin-right: 9px;}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">Posted on: \(self.selectedFeedPubDate)</p> \(self.selectedFeedContent)"
                 
             } else if self.selectedChannelName == "The Voice" {
                             
@@ -95,7 +115,7 @@ class PageViewController: UIViewController, UIWebViewDelegate {
                 self.selectedFeedContent = self.selectedFeedContent.stringByReplacingOccurrencesOfString("K2FeedImage\"><img src=", withString: "")
                 self.selectedFeedContent = self.selectedFeedContent.stringByReplacingOccurrencesOfString("border", withString: "width = 100%")
                 self.selectedFeedContent = self.selectedFeedContent.stringByReplacingOccurrencesOfString("margin: 3px", withString: "")
-                feedContent = "<style> .date {color: dimgrey; font-size: 90%}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">Posted on: \(self.selectedFeedPubDate)</p>  \(self.selectedFeedContent)"
+                feedContent = "<style> .date {color: dimgrey; font-size: 90%} body {margin-left: 9px; margin-right: 9px;}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">Posted on: \(self.selectedFeedPubDate)</p>  \(self.selectedFeedContent)"
                 
             } else if self.selectedChannelName == "Karen News" || self.selectedChannelName == "Popular News" {
                 
@@ -103,11 +123,13 @@ class PageViewController: UIViewController, UIWebViewDelegate {
                 self.selectedFeedPubDate = self.formatDateFromString("EEE, dd MMM yyyy HH:mm:ss", dateToString: self.selectedFeedPubDate)
                 self.selectedFeedIrrwaddyContent = self.selectedFeedIrrwaddyContent.stringByReplacingOccurrencesOfString("width", withString: "width = 100%")
                 self.selectedFeedIrrwaddyContent = self.selectedFeedIrrwaddyContent.stringByReplacingOccurrencesOfString("height", withString: " ")
-                feedContent = "<style> .date {color: dimgrey; font-size: 90%}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">Posted on: \(self.selectedFeedPubDate)</p>  \(self.selectedFeedIrrwaddyContent)"
+                feedContent = "<style> .date {color: dimgrey; font-size: 90%} body {margin-left: 9px; margin-right: 9px;}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">Posted on: \(self.selectedFeedPubDate)</p>  \(self.selectedFeedIrrwaddyContent)"
                 
             } else if self.selectedChannelName == "Myanmar Celebrity" {
                 
                 self.selectedFeedPubDate = self.selectedFeedPubDate.stringByReplacingOccurrencesOfString(" PST", withString: "")
+                self.selectedFeedPubDate = self.selectedFeedPubDate.stringByReplacingOccurrencesOfString(" PDT", withString: "")
+
                 self.selectedFeedPubDate = self.formatDateFromString("EEE, dd MMM yyyy HH:mm:ss", dateToString: self.selectedFeedPubDate)
 
                 self.selectedFeedContent = self.selectedFeedContent.stringByReplacingOccurrencesOfString("img", withString: "img width = 100%")
@@ -115,7 +137,7 @@ class PageViewController: UIViewController, UIWebViewDelegate {
                 self.selectedFeedContent = self.selectedFeedContent.stringByReplacingOccurrencesOfString("border", withString: "")
                 self.selectedFeedContent = self.selectedFeedContent.stringByReplacingOccurrencesOfString("width", withString: "width = 100%")
                 self.selectedFeedContent = self.selectedFeedContent.stringByReplacingOccurrencesOfString("height", withString: " ")
-                feedContent = "<style> .date {color: dimgrey; font-size: 90%}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">\(self.selectedFeedPubDate)</p>  \(self.selectedFeedContent)"
+                feedContent = "<style> .date {color: dimgrey; font-size: 90%} body {margin-left: 9px; margin-right: 9px;}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">\(self.selectedFeedPubDate)</p>  \(self.selectedFeedContent)"
                 
             } else {
         
@@ -129,10 +151,10 @@ class PageViewController: UIViewController, UIWebViewDelegate {
                 self.selectedFeedContent = self.selectedFeedContent.stringByReplacingOccurrencesOfString("border", withString: "")
                 self.selectedFeedContent = self.selectedFeedContent.stringByReplacingOccurrencesOfString("width", withString: "width = 100%")
                 self.selectedFeedContent = self.selectedFeedContent.stringByReplacingOccurrencesOfString("height", withString: " ")
-                feedContent = "<style> .date {color: dimgrey; font-size: 90%}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">\(self.selectedFeedPubDate)</p>  \(self.selectedFeedContent)"
+                feedContent = "<style> .date {color: dimgrey; font-size: 90%} body {margin-left: 9px; margin-right: 9px;}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">\(self.selectedFeedPubDate)</p>  \(self.selectedFeedContent)"
                 
             }
-            
+                        
             dispatch_async(dispatch_get_main_queue(), {
                 
                 let attributes = [
@@ -142,20 +164,14 @@ class PageViewController: UIViewController, UIWebViewDelegate {
                 self.navigationController?.navigationBar.titleTextAttributes = attributes
                 
                 self.navigationItem.title = self.selectedFeedTitle
-                self.myWebView.backgroundColor = UIColor.clearColor()
-                self.myWebView.opaque = false
-                self.myWebView.delegate = self
-                self.myWebView?.loadHTMLString(feedContent, baseURL: nil)
+                self.webView?.loadHTMLString(feedContent, baseURL: nil)
             })
-            
         })
-
-        
     }
     
-    func formatDateFromString(let format: String, var dateToString: String) -> String {
+    func formatDateFromString(let format: String, dateToString: String) -> String {
         
-        dateToString = dateToString.stringByReplacingOccurrencesOfString("\n", withString: "")
+        var dateToString = dateToString.stringByReplacingOccurrencesOfString("\n", withString: "")
         
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = format
@@ -165,7 +181,6 @@ class PageViewController: UIViewController, UIWebViewDelegate {
         dateToString = dateFormatter.stringFromDate(date!)
         
         return dateToString
-        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {

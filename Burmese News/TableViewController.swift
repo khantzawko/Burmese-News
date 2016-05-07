@@ -17,6 +17,15 @@ class TableViewController: UITableViewController, NSXMLParserDelegate {
     var channelURL = String()
     var channelRow = Int()
     
+    override func viewWillAppear(animated: Bool) {
+        let name = channelName
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: name)
+        
+        let builder = GAIDictionaryBuilder.createScreenView()
+        tracker.send(builder.build() as [NSObject : AnyObject])
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

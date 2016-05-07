@@ -10,11 +10,20 @@ import UIKit
 
 class ChannelTableViewController: UITableViewController, UIGestureRecognizerDelegate {
     
-    var channelNames = ["Voice of America (VOA)", "DVB", "The Irrawaddy", "Radio Free Asia (RFA)", "Mizzima", "The Voice", "Myanmar Celebrity", "Popular News", "Karen News", "Panglong"]
+    var channelNames = ["7 Day News", "Voice of America (VOA)", "DVB", "The Irrawaddy", "Radio Free Asia (RFA)", "Mizzima", "The Voice", "Myanmar Celebrity", "Popular News", "Karen News", "Panglong"]
     
-    var channelURLs = ["http://burmese.voanews.com/api/epiqq", "http://burmese.dvb.no/feed", "http://burma.irrawaddy.org/feed", "http://www.rfa.org/burmese/news/RSS", "http://mizzimaburmese.com/rss.xml", "http://www.thevoicemyanmar.com/index.php/news/local?format=feed&limitstart=", "http://feeds.feedburner.com/MyanmarCelebrity?format=xml", "http://popularmyanmar.com/afpopular/?feed=rss2", "http://kicnews.org/feed/", "http://panglongburmese.blogspot.com/feeds/posts/default"]
+    var channelURLs = ["http://www.7daydaily.com/feed/category/12/feed", "http://burmese.voanews.com/api/epiqq", "http://burmese.dvb.no/feed", "http://burma.irrawaddy.org/feed", "http://www.rfa.org/burmese/news/RSS", "http://mizzimaburmese.com/rss.xml", "http://www.thevoicemyanmar.com/index.php/news/local?format=feed&limitstart=", "http://feeds.feedburner.com/MyanmarCelebrity?format=xml", "http://popularmyanmar.com/afpopular/?feed=rss2", "http://kicnews.org/feed/", "http://panglongburmese.blogspot.com/feeds/posts/default"]
     
     var defaults = NSUserDefaults.standardUserDefaults()
+    
+    override func viewWillAppear(animated: Bool) {
+        let name = self.navigationItem.title!
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: name)
+        
+        let builder = GAIDictionaryBuilder.createScreenView()
+        tracker.send(builder.build() as [NSObject : AnyObject])
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,16 +39,20 @@ class ChannelTableViewController: UITableViewController, UIGestureRecognizerDele
             defaults.removeObjectForKey("Name")
             defaults.removeObjectForKey("URL")
         }
-
         
-        if (defaults.objectForKey("channelNames") != nil) {       // object name is not empty
-            channelNames = defaults.objectForKey("channelNames") as? [String] ?? [String]()
-            channelURLs = defaults.objectForKey("channelURLs") as? [String] ?? [String]()
+        if (defaults.objectForKey("channelNames") != nil) && (defaults.objectForKey("channelURLs") != nil) {
+            defaults.removeObjectForKey("channelNames")
+            defaults.removeObjectForKey("channelURLs")
+        }
+        
+        if (defaults.objectForKey("Names") != nil) {       // object name is not empty
+            channelNames = defaults.objectForKey("Names") as? [String] ?? [String]()
+            channelURLs = defaults.objectForKey("URLs") as? [String] ?? [String]()
         }
         
         addGradientBackground()
         
-        let longpress = UILongPressGestureRecognizer(target: self, action: "longPressGestureRecognized:")
+        let longpress = UILongPressGestureRecognizer(target: self, action: #selector(ChannelTableViewController.longPressGestureRecognized(_:)))
         longpress.minimumPressDuration = 0.5
         tableView.addGestureRecognizer(longpress)
     }
@@ -119,8 +132,8 @@ class ChannelTableViewController: UITableViewController, UIGestureRecognizerDele
                 swap(&channelNames[indexPath!.row], &channelNames[Path.initialIndexPath!.row])
                 swap(&channelURLs[indexPath!.row], &channelURLs[Path.initialIndexPath!.row])
                 
-                defaults.setObject(channelNames, forKey: "channelNames")
-                defaults.setObject(channelURLs, forKey: "channelURLs")
+                defaults.setObject(channelNames, forKey: "Names")
+                defaults.setObject(channelURLs, forKey: "URLs")
                 
                 tableView.moveRowAtIndexPath(Path.initialIndexPath!, toIndexPath: indexPath!)
                 Path.initialIndexPath = indexPath

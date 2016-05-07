@@ -15,12 +15,15 @@
 		141244811B651DD600D8F100 /* Burmese_NewsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141244801B651DD600D8F100 /* Burmese_NewsUITests.swift */; };
 		1412448F1B651EAD00D8F100 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1412448E1B651EAD00D8F100 /* TableViewController.swift */; };
 		142556F51B7B7B7D00F2F99A /* ZawgyiOne2008.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 142556F41B7B7B7D00F2F99A /* ZawgyiOne2008.ttf */; };
+		14546BA81CA88A510063EB6A /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 14546BA71CA88A510063EB6A /* libz.1.dylib */; };
 		14641DD91B6621EC0069EA58 /* XmlParserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14641DD81B6621EC0069EA58 /* XmlParserManager.swift */; };
 		14641DDB1B662A620069EA58 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14641DDA1B662A620069EA58 /* WebViewController.swift */; };
 		1465DFE31BC381B0000DF505 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1465DFE21BC381B0000DF505 /* SettingTableViewController.swift */; };
+		146B37121CA85CA000671C90 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 146B37111CA85CA000671C90 /* GoogleService-Info.plist */; };
 		1479C8551BB841E80097E078 /* CAGradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1479C8541BB841E80097E078 /* CAGradientLayer.swift */; };
 		14B467751B674E2300138211 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B467741B674E2300138211 /* PageViewController.swift */; };
 		14B467771B6758E800138211 /* ChannelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B467761B6758E800138211 /* ChannelTableViewController.swift */; };
+		BD4AD34C9D0BB0F889180D5F /* libPods-Burmese News.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EE4377964BBAA09158C3E97 /* libPods-Burmese News.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0DAB37A32CAC8AA9734A0A43 /* Pods-Burmese News.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Burmese News.release.xcconfig"; path = "Pods/Target Support Files/Pods-Burmese News/Pods-Burmese News.release.xcconfig"; sourceTree = "<group>"; };
 		1412445A1B651DD600D8F100 /* Burmese News.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Burmese News.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1412445D1B651DD600D8F100 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		141244621B651DD600D8F100 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -55,12 +59,17 @@
 		141244821B651DD600D8F100 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1412448E1B651EAD00D8F100 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		142556F41B7B7B7D00F2F99A /* ZawgyiOne2008.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ZawgyiOne2008.ttf; sourceTree = "<group>"; };
+		14546BA71CA88A510063EB6A /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = ../../../../usr/lib/libz.1.dylib; sourceTree = "<group>"; };
+		14546BA91CA88A950063EB6A /* Burmese News-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Burmese News-Bridging-Header.h"; sourceTree = "<group>"; };
 		14641DD81B6621EC0069EA58 /* XmlParserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XmlParserManager.swift; sourceTree = "<group>"; };
 		14641DDA1B662A620069EA58 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		1465DFE21BC381B0000DF505 /* SettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
+		146B37111CA85CA000671C90 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1479C8541BB841E80097E078 /* CAGradientLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAGradientLayer.swift; sourceTree = "<group>"; };
 		14B467741B674E2300138211 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		14B467761B6758E800138211 /* ChannelTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelTableViewController.swift; sourceTree = "<group>"; };
+		5EE4377964BBAA09158C3E97 /* libPods-Burmese News.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Burmese News.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE5A39E9E0A1D7DFF6B8FB47 /* Pods-Burmese News.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Burmese News.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Burmese News/Pods-Burmese News.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +77,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14546BA81CA88A510063EB6A /* libz.1.dylib in Frameworks */,
+				BD4AD34C9D0BB0F889180D5F /* libPods-Burmese News.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +106,8 @@
 				141244741B651DD600D8F100 /* Burmese NewsTests */,
 				1412447F1B651DD600D8F100 /* Burmese NewsUITests */,
 				1412445B1B651DD600D8F100 /* Products */,
+				536C24A6083A0A5835291573 /* Pods */,
+				1ECCEACD7F8CCB3340CAEEA1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -145,13 +158,33 @@
 		141244901B651FA500D8F100 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				14546BA91CA88A950063EB6A /* Burmese News-Bridging-Header.h */,
 				142556F41B7B7B7D00F2F99A /* ZawgyiOne2008.ttf */,
 				1412445D1B651DD600D8F100 /* AppDelegate.swift */,
 				141244671B651DD600D8F100 /* Assets.xcassets */,
 				141244691B651DD600D8F100 /* LaunchScreen.storyboard */,
 				1412446C1B651DD600D8F100 /* Info.plist */,
+				146B37111CA85CA000671C90 /* GoogleService-Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1ECCEACD7F8CCB3340CAEEA1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				14546BA71CA88A510063EB6A /* libz.1.dylib */,
+				5EE4377964BBAA09158C3E97 /* libPods-Burmese News.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		536C24A6083A0A5835291573 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FE5A39E9E0A1D7DFF6B8FB47 /* Pods-Burmese News.debug.xcconfig */,
+				0DAB37A32CAC8AA9734A0A43 /* Pods-Burmese News.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,9 +194,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 141244851B651DD600D8F100 /* Build configuration list for PBXNativeTarget "Burmese News" */;
 			buildPhases = (
+				46237D2A3D6C577488D76162 /* Check Pods Manifest.lock */,
 				141244561B651DD600D8F100 /* Sources */,
 				141244571B651DD600D8F100 /* Frameworks */,
 				141244581B651DD600D8F100 /* Resources */,
+				E534F8653F806A33D9A964B0 /* Embed Pods Frameworks */,
+				3097494CA0BAB0B9CB474BC8 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -216,6 +252,7 @@
 		141244521B651DD600D8F100 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Khant Zaw Ko";
 				TargetAttributes = {
@@ -262,6 +299,7 @@
 				1412446B1B651DD600D8F100 /* LaunchScreen.storyboard in Resources */,
 				141244681B651DD600D8F100 /* Assets.xcassets in Resources */,
 				141244631B651DD600D8F100 /* Main.storyboard in Resources */,
+				146B37121CA85CA000671C90 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +318,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3097494CA0BAB0B9CB474BC8 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Burmese News/Pods-Burmese News-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		46237D2A3D6C577488D76162 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E534F8653F806A33D9A964B0 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Burmese News/Pods-Burmese News-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		141244561B651DD600D8F100 /* Sources */ = {
@@ -437,10 +523,11 @@
 		};
 		141244861B651DD600D8F100 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FE5A39E9E0A1D7DFF6B8FB47 /* Pods-Burmese News.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Khant Zaw Ko (EU2GQT9HEF)";
 				INFOPLIST_FILE = "Burmese News/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -449,15 +536,19 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				"SDKROOT[arch=*]" = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Burmese News/Burmese News-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		141244871B651DD600D8F100 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0DAB37A32CAC8AA9734A0A43 /* Pods-Burmese News.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Khant Zaw Ko (EU2GQT9HEF)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				INFOPLIST_FILE = "Burmese News/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -466,6 +557,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Burmese News/Burmese News-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

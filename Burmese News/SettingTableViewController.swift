@@ -10,6 +10,14 @@ import UIKit
 
 class SettingTableViewController: UITableViewController {
     
+    override func viewWillAppear(animated: Bool) {
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: "Setting View")
+        
+        let builder = GAIDictionaryBuilder.createScreenView()
+        tracker.send(builder.build() as [NSObject : AnyObject])
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addGradientBackground()
@@ -17,7 +25,6 @@ class SettingTableViewController: UITableViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-
     }
     
     func addGradientBackground() -> () {
@@ -28,5 +35,4 @@ class SettingTableViewController: UITableViewController {
         background.frame = CGRectMake(0.0, 0.0, view.frame.size.width * deviceScale, view.frame.size.height * deviceScale)
         backgroundView.layer.insertSublayer(background, above: nil)
         self.tableView.backgroundView = backgroundView
-        
     }}
