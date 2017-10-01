@@ -24,120 +24,122 @@ class PageViewController: UIViewController, UIWebViewDelegate {
     
     var element = NSString()
     
-    func webViewDidStartLoad(webView: UIWebView) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    func webViewDidStartLoad(_ webView: UIWebView) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }
     
-    func webViewDidFinishLoad(webView: UIWebView) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
     
-    func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+    func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         let name = selectedChannelName
         let tracker = GAI.sharedInstance().defaultTracker
-        tracker.set(kGAIScreenName, value: name)
+        tracker?.set(kGAIScreenName, value: name)
         
-        let builder = GAIDictionaryBuilder.createScreenView()
-        tracker.send(builder.build() as [NSObject : AnyObject])
+        let builder: NSObject = GAIDictionaryBuilder.createScreenView().build()
+        tracker?.send(builder as! [NSObject : AnyObject])
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        webView = UIWebView(frame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height))
+        webView = UIWebView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
         self.view = self.webView
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+        DispatchQueue.main.async(execute: {
                 
             let feedContent:String
 
-            self.selectedFeedImage = self.selectedFeedImage.stringByReplacingOccurrencesOfString("\n", withString: "")
+            self.selectedFeedImage = self.selectedFeedImage.replacingOccurrences(of: "\n", with: "")
             
             if self.selectedChannelName == "7 Day News"{
-                self.selectedFeedPubDate = self.selectedFeedPubDate.stringByReplacingOccurrencesOfString(" +0000", withString: "")
+                self.selectedFeedPubDate = self.selectedFeedPubDate.replacingOccurrences(of: " +0000", with: "")
                 
                 self.selectedFeedPubDate = self.formatDateFromString("EEE, dd MMM yyyy HH:mm:ss", dateToString: self.selectedFeedPubDate)
-                feedContent = "<style> .date {color: dimgrey; font-size: 90%} body {margin-left: 9px; margin-right: 9px;}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">Posted on: \(self.selectedFeedPubDate)</p> <img src = \(self.selectedFeedImage) width = 100%> <br> <br> \(self.selectedFeedContent)"
+                feedContent = "<style> .date {color: dimgrey; font-size: 90%} body {margin-left: 9px; margin-right: 9px; font-family: Zawgyi-One;}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">Posted on: \(self.selectedFeedPubDate)</p> <img src = \(self.selectedFeedImage) width = 100%> <br> <br> \(self.selectedFeedContent)"
                 
                 
             } else if self.selectedChannelName == "The Irrawaddy"{
                 
-                self.selectedFeedPubDate = self.selectedFeedPubDate.stringByReplacingOccurrencesOfString(" +0000", withString: "Z")
+                self.selectedFeedPubDate = self.selectedFeedPubDate.replacingOccurrences(of: " +0000", with: "Z")
                 self.selectedFeedPubDate = self.formatDateFromString("EEE, dd MMM yyyy HH:mm:ssZ", dateToString: self.selectedFeedPubDate)
-                var changeImageSize: String = self.selectedFeedIrrwaddyContent.stringByReplacingOccurrencesOfString("620px", withString: "100%")
-                changeImageSize = changeImageSize.stringByReplacingOccurrencesOfString("610", withString: "100%")
-                changeImageSize = changeImageSize.stringByReplacingOccurrencesOfString("height", withString: " ")
-                feedContent = "<style> .date {color: dimgrey; font-size: 90%} body {margin-left: 9px; margin-right: 9px;}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">Posted on: \(self.selectedFeedPubDate)</p>\(changeImageSize)"
+                var changeImageSize: String = self.selectedFeedIrrwaddyContent.replacingOccurrences(of: "width", with: "width = 100%")
+                changeImageSize = changeImageSize.replacingOccurrences(of: "height", with: " ")
+
+                feedContent = "<style> .date {color: dimgrey; font-size: 90%;} body {margin-left: 9px; margin-right: 9px; font-family: Zawgyi-One;}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">Posted on: \(self.selectedFeedPubDate)</p>\(changeImageSize)"
                 
             } else if self.selectedChannelName == "DVB" {
                 
-                self.selectedFeedPubDate = self.selectedFeedPubDate.stringByReplacingOccurrencesOfString(" +0000", withString: "Z")
+                self.selectedFeedPubDate = self.selectedFeedPubDate.replacingOccurrences(of: " +0000", with: "Z")
                 self.selectedFeedPubDate = self.formatDateFromString("EEE, dd MMM yyyy HH:mm:ssZ", dateToString: self.selectedFeedPubDate)
-                self.selectedFeedIrrwaddyContent = self.selectedFeedIrrwaddyContent.stringByReplacingOccurrencesOfString("width", withString: "width = 100%")
-                self.selectedFeedIrrwaddyContent = self.selectedFeedIrrwaddyContent.stringByReplacingOccurrencesOfString("height", withString: " ")
-                feedContent = "<style> .date {color: dimgrey; font-size: 90%} body {margin-left: 9px; margin-right: 9px;}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">Posted on: \(self.selectedFeedPubDate)</p> \(self.selectedFeedIrrwaddyContent)"
+                self.selectedFeedIrrwaddyContent = self.selectedFeedIrrwaddyContent.replacingOccurrences(of: "width", with: "width = 100%")
+                self.selectedFeedIrrwaddyContent = self.selectedFeedIrrwaddyContent.replacingOccurrences(of: "height", with: " ")
+                feedContent = "<style> .date {color: dimgrey; font-size: 90%} body {margin-left: 9px; margin-right: 9px; font-family: Zawgyi-One;}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">Posted on: \(self.selectedFeedPubDate)</p> \(self.selectedFeedIrrwaddyContent)"
                 
                 
             } else if self.selectedChannelName == "Radio Free Asia (RFA)" {
                 
-                self.selectedFeedPubDate = self.selectedFeedPubDate.stringByReplacingOccurrencesOfString("T", withString: " ")
+                self.selectedFeedPubDate = self.selectedFeedPubDate.replacingOccurrences(of: "T", with: " ")
                 self.selectedFeedPubDate = self.formatDateFromString("yyyy-MM-dd HH:mm:ssZ", dateToString: self.selectedFeedPubDate)
-                self.selectedFeedIrrwaddyContent = self.selectedFeedIrrwaddyContent.stringByReplacingOccurrencesOfString("img", withString: "img width = 100%")
-                feedContent = "<style> .date {color: dimgrey; font-size: 90%} body {margin-left: 9px; margin-right: 9px;}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">Posted on: \(self.selectedFeedPubDate)</p> \(self.selectedFeedIrrwaddyContent)"
+                self.selectedFeedIrrwaddyContent = self.selectedFeedIrrwaddyContent.replacingOccurrences(of: "img", with: "img width = 100%")
+                feedContent = "<style> .date {color: dimgrey; font-size: 90%} body {margin-left: 9px; margin-right: 9px; font-family: Zawgyi-One;}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">Posted on: \(self.selectedFeedPubDate)</p> \(self.selectedFeedIrrwaddyContent)"
                 
             } else if self.selectedChannelName == "Voice of America (VOA)" {
                 
-                self.selectedFeedPubDate = self.selectedFeedPubDate.stringByReplacingOccurrencesOfString(" +0630", withString: "")
+                self.selectedFeedPubDate = self.selectedFeedPubDate.replacingOccurrences(of: " +0630", with: "")
                 
                 self.selectedFeedPubDate = self.formatDateFromString("EEE, dd MMM yyyy HH:mm:ss", dateToString: self.selectedFeedPubDate)
-                feedContent = "<style> .date {color: dimgrey; font-size: 90%} body {margin-left: 9px; margin-right: 9px;}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">Posted on: \(self.selectedFeedPubDate)</p> <img src = \(self.selectedFeedImage) width = 100%> <br> <br> \(self.selectedFeedContent)"
+                feedContent = "<style> .date {color: dimgrey; font-size: 90%} body {margin-left: 9px; margin-right: 9px; font-family: Zawgyi-One;}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">Posted on: \(self.selectedFeedPubDate)</p> <img src = \(self.selectedFeedImage) width = 100%> <br> <br> \(self.selectedFeedContent)"
                 
             } else if self.selectedChannelName == "Panglong" {
                 
-                self.selectedFeedPubDate = self.selectedFeedPubDate.stringByReplacingOccurrencesOfString("T", withString: " ")
-                self.selectedFeedPubDate = self.selectedFeedPubDate.stringByReplacingOccurrencesOfString("-07:00", withString: "Z")
+                self.selectedFeedPubDate = self.selectedFeedPubDate.replacingOccurrences(of: "T", with: " ")
+                self.selectedFeedPubDate = self.selectedFeedPubDate.replacingOccurrences(of: "-07:00", with: "Z")
                 self.selectedFeedPubDate = self.formatDateFromString("yyyy-MM-dd HH:mm:ss.SSSZ", dateToString: self.selectedFeedPubDate)
-                self.selectedFeedContent = self.selectedFeedContent.stringByReplacingOccurrencesOfString("margin-left", withString: "")
-                self.selectedFeedContent = self.selectedFeedContent.stringByReplacingOccurrencesOfString("margin-right", withString: "")
-                self.selectedFeedContent = self.selectedFeedContent.stringByReplacingOccurrencesOfString("width", withString: "width = 100%")
-                self.selectedFeedContent = self.selectedFeedContent.stringByReplacingOccurrencesOfString("height", withString: " ")
-                self.selectedFeedContent = self.selectedFeedContent.stringByReplacingOccurrencesOfString("img", withString: "img width = 100%")
-                feedContent = "<style> .date {color: dimgrey; font-size: 90%} body {margin-left: 9px; margin-right: 9px;}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">Posted on: \(self.selectedFeedPubDate)</p> \(self.selectedFeedContent)"
+                self.selectedFeedContent = self.selectedFeedContent.replacingOccurrences(of: "margin-left", with: "")
+                self.selectedFeedContent = self.selectedFeedContent.replacingOccurrences(of: "margin-right", with: "")
+                self.selectedFeedContent = self.selectedFeedContent.replacingOccurrences(of: "width", with: "width = 100%")
+                self.selectedFeedContent = self.selectedFeedContent.replacingOccurrences(of: "height", with: " ")
+                self.selectedFeedContent = self.selectedFeedContent.replacingOccurrences(of: "img", with: "img width = 100%")
+                feedContent = "<style> .date {color: dimgrey; font-size: 90%} body {margin-left: 9px; margin-right: 9px; font-family: Zawgyi-One;}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">Posted on: \(self.selectedFeedPubDate)</p> \(self.selectedFeedContent)"
                 
             } else if self.selectedChannelName == "The Voice" {
                             
-                self.selectedFeedPubDate = self.selectedFeedPubDate.stringByReplacingOccurrencesOfString(" +0000", withString: "")
+                self.selectedFeedPubDate = self.selectedFeedPubDate.replacingOccurrences(of: " +0000", with: "")
                 self.selectedFeedPubDate = self.formatDateFromString("EEE, dd MMM yyyy HH:mm:ss", dateToString: self.selectedFeedPubDate)
-                self.selectedFeedContent = self.selectedFeedContent.stringByReplacingOccurrencesOfString("K2FeedImage\"><img src=", withString: "")
-                self.selectedFeedContent = self.selectedFeedContent.stringByReplacingOccurrencesOfString("border", withString: "width = 100%")
-                self.selectedFeedContent = self.selectedFeedContent.stringByReplacingOccurrencesOfString("margin: 3px", withString: "")
-                feedContent = "<style> .date {color: dimgrey; font-size: 90%} body {margin-left: 9px; margin-right: 9px;}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">Posted on: \(self.selectedFeedPubDate)</p>  \(self.selectedFeedContent)"
+                self.selectedFeedContent = self.selectedFeedContent.replacingOccurrences(of: "K2FeedImage\"><img src=", with: "")
+                self.selectedFeedContent = self.selectedFeedContent.replacingOccurrences(of: "border", with: "width = 100%")
+                self.selectedFeedContent = self.selectedFeedContent.replacingOccurrences(of: "margin: 3px", with: "")
+                feedContent = "<style> .date {color: dimgrey; font-size: 90%} body {margin-left: 9px; margin-right: 9px; font-family: Zawgyi-One;}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">Posted on: \(self.selectedFeedPubDate)</p>  \(self.selectedFeedContent)"
                 
             } else if self.selectedChannelName == "Karen News" || self.selectedChannelName == "Popular News" {
                 
-                self.selectedFeedPubDate = self.selectedFeedPubDate.stringByReplacingOccurrencesOfString(" +0000", withString: "")
+                self.selectedFeedPubDate = self.selectedFeedPubDate.replacingOccurrences(of: " +0000", with: "")
                 self.selectedFeedPubDate = self.formatDateFromString("EEE, dd MMM yyyy HH:mm:ss", dateToString: self.selectedFeedPubDate)
-                self.selectedFeedIrrwaddyContent = self.selectedFeedIrrwaddyContent.stringByReplacingOccurrencesOfString("width", withString: "width = 100%")
-                self.selectedFeedIrrwaddyContent = self.selectedFeedIrrwaddyContent.stringByReplacingOccurrencesOfString("height", withString: " ")
-                feedContent = "<style> .date {color: dimgrey; font-size: 90%} body {margin-left: 9px; margin-right: 9px;}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">Posted on: \(self.selectedFeedPubDate)</p>  \(self.selectedFeedIrrwaddyContent)"
+                self.selectedFeedIrrwaddyContent = self.selectedFeedIrrwaddyContent.replacingOccurrences(of: "width", with: "width = 100%")
+                self.selectedFeedIrrwaddyContent = self.selectedFeedIrrwaddyContent.replacingOccurrences(of: "height", with: " ")
+                feedContent = "<style> .date {color: dimgrey; font-size: 90%} body {margin-left: 9px; margin-right: 9px; font-family: Zawgyi-One;}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">Posted on: \(self.selectedFeedPubDate)</p>  \(self.selectedFeedIrrwaddyContent)"
                 
             } else if self.selectedChannelName == "Myanmar Celebrity" {
                 
-                self.selectedFeedPubDate = self.selectedFeedPubDate.stringByReplacingOccurrencesOfString(" PST", withString: "")
-                self.selectedFeedPubDate = self.selectedFeedPubDate.stringByReplacingOccurrencesOfString(" PDT", withString: "")
+                //2016-08-25T00:46:00.003-07:00
+                
+                self.selectedFeedPubDate = self.selectedFeedPubDate.replacingOccurrences(of: "T", with: " ")
+                self.selectedFeedPubDate = self.selectedFeedPubDate.replacingOccurrences(of: "-07:00", with: "")
 
-                self.selectedFeedPubDate = self.formatDateFromString("EEE, dd MMM yyyy HH:mm:ss", dateToString: self.selectedFeedPubDate)
+                self.selectedFeedPubDate = self.formatDateFromString("yyyy-MM-dd HH:mm:ss.SSS", dateToString: self.selectedFeedPubDate)
 
-                self.selectedFeedContent = self.selectedFeedContent.stringByReplacingOccurrencesOfString("img", withString: "img width = 100%")
-                self.selectedFeedContent = self.selectedFeedContent.stringByReplacingOccurrencesOfString("margin", withString: "")
-                self.selectedFeedContent = self.selectedFeedContent.stringByReplacingOccurrencesOfString("border", withString: "")
-                self.selectedFeedContent = self.selectedFeedContent.stringByReplacingOccurrencesOfString("width", withString: "width = 100%")
-                self.selectedFeedContent = self.selectedFeedContent.stringByReplacingOccurrencesOfString("height", withString: " ")
-                feedContent = "<style> .date {color: dimgrey; font-size: 90%} body {margin-left: 9px; margin-right: 9px;}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">\(self.selectedFeedPubDate)</p>  \(self.selectedFeedContent)"
+                self.selectedFeedContent = self.selectedFeedContent.replacingOccurrences(of: "img", with: "img width = 100%")
+                self.selectedFeedContent = self.selectedFeedContent.replacingOccurrences(of: "margin", with: "")
+                self.selectedFeedContent = self.selectedFeedContent.replacingOccurrences(of: "border", with: "")
+                self.selectedFeedContent = self.selectedFeedContent.replacingOccurrences(of: "width", with: "width = 100%")
+                self.selectedFeedContent = self.selectedFeedContent.replacingOccurrences(of: "height", with: " ")
+                feedContent = "<style> .date {color: dimgrey; font-size: 90%} body {margin-left: 9px; margin-right: 9px; font-family: Zawgyi-One;}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">\(self.selectedFeedPubDate)</p>  \(self.selectedFeedContent)"
                 
             } else {
         
@@ -146,20 +148,20 @@ class PageViewController: UIViewController, UIWebViewDelegate {
                 
                 self.selectedFeedPubDate = ""
                 
-                self.selectedFeedContent = self.selectedFeedContent.stringByReplacingOccurrencesOfString("img", withString: "img width = 100%")
-                self.selectedFeedContent = self.selectedFeedContent.stringByReplacingOccurrencesOfString("margin", withString: "")
-                self.selectedFeedContent = self.selectedFeedContent.stringByReplacingOccurrencesOfString("border", withString: "")
-                self.selectedFeedContent = self.selectedFeedContent.stringByReplacingOccurrencesOfString("width", withString: "width = 100%")
-                self.selectedFeedContent = self.selectedFeedContent.stringByReplacingOccurrencesOfString("height", withString: " ")
-                feedContent = "<style> .date {color: dimgrey; font-size: 90%} body {margin-left: 9px; margin-right: 9px;}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">\(self.selectedFeedPubDate)</p>  \(self.selectedFeedContent)"
+                self.selectedFeedContent = self.selectedFeedContent.replacingOccurrences(of: "img", with: "img width = 100%")
+                self.selectedFeedContent = self.selectedFeedContent.replacingOccurrences(of: "margin", with: "")
+                self.selectedFeedContent = self.selectedFeedContent.replacingOccurrences(of: "border", with: "")
+                self.selectedFeedContent = self.selectedFeedContent.replacingOccurrences(of: "width", with: "width = 100%")
+                self.selectedFeedContent = self.selectedFeedContent.replacingOccurrences(of: "height", with: " ")
+                feedContent = "<style> .date {color: dimgrey; font-size: 90%} body {margin-left: 9px; margin-right: 9px; font-family: Zawgyi-One;}</style> <h3 style = 'color:black'>\(self.selectedFeedTitle)</h3> <p class = 'date' style=\"font-family: courier\">\(self.selectedFeedPubDate)</p>  \(self.selectedFeedContent)"
                 
             }
                         
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 
                 let attributes = [
-                    NSForegroundColorAttributeName: UIColor.blackColor(),
-                    NSFontAttributeName: UIFont(name: "Zawgyi-One", size: 16)!
+                    NSAttributedStringKey.foregroundColor: UIColor.black,
+                    NSAttributedStringKey.font: UIFont(name: "Zawgyi-One", size: 16)!
                 ]
                 self.navigationController?.navigationBar.titleTextAttributes = attributes
                 
@@ -169,29 +171,29 @@ class PageViewController: UIViewController, UIWebViewDelegate {
         })
     }
     
-    func formatDateFromString(let format: String, dateToString: String) -> String {
+    func formatDateFromString(_ format: String, dateToString: String) -> String {
         
-        var dateToString = dateToString.stringByReplacingOccurrencesOfString("\n", withString: "")
+        var dateToString = dateToString.replacingOccurrences(of: "\n", with: "")
         
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
-        let date = dateFormatter.dateFromString(dateToString)
-        dateFormatter.dateStyle = .LongStyle
-        dateFormatter.timeStyle = .ShortStyle
-        dateToString = dateFormatter.stringFromDate(date!)
+        let date = dateFormatter.date(from: dateToString)
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .short
+        dateToString = dateFormatter.string(from: date!)
         
         return dateToString
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "openWebPage" {
             
-            let fwpvc: WebViewController = segue.destinationViewController as! WebViewController
-            self.selectedFeedURL =  self.selectedFeedURL.stringByReplacingOccurrencesOfString(" ", withString:"")
-            self.selectedFeedURL =  self.selectedFeedURL.stringByReplacingOccurrencesOfString("\n", withString:"")
-            self.selectedFeedURL =  self.selectedFeedURL.stringByReplacingOccurrencesOfString("\t", withString:"")
-            self.selectedFeedURL =  self.selectedFeedURL.stringByReplacingOccurrencesOfString("\t\t", withString:"")
+            let fwpvc: WebViewController = segue.destination as! WebViewController
+            self.selectedFeedURL =  self.selectedFeedURL.replacingOccurrences(of: " ", with:"")
+            self.selectedFeedURL =  self.selectedFeedURL.replacingOccurrences(of: "\n", with:"")
+            self.selectedFeedURL =  self.selectedFeedURL.replacingOccurrences(of: "\t", with:"")
+            self.selectedFeedURL =  self.selectedFeedURL.replacingOccurrences(of: "\t\t", with:"")
 
             fwpvc.feedURL = self.selectedFeedURL
         }

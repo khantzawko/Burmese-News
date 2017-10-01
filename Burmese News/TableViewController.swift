@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TableViewController: UITableViewController, NSXMLParserDelegate {
+class TableViewController: UITableViewController, XMLParserDelegate {
     
     var newFeed: NSArray = []
     var url: NSURL = NSURL()
@@ -17,13 +17,13 @@ class TableViewController: UITableViewController, NSXMLParserDelegate {
     var channelURL = String()
     var channelRow = Int()
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         let name = channelName
         let tracker = GAI.sharedInstance().defaultTracker
-        tracker.set(kGAIScreenName, value: name)
+        tracker?.set(kGAIScreenName, value: name)
         
-        let builder = GAIDictionaryBuilder.createScreenView()
-        tracker.send(builder.build() as [NSObject : AnyObject])
+        let builder: NSObject = GAIDictionaryBuilder.createScreenView().build()
+        tracker?.send(builder as! [NSObject : AnyObject])
     }
     
     override func viewDidLoad() {
@@ -32,33 +32,33 @@ class TableViewController: UITableViewController, NSXMLParserDelegate {
         self.navigationItem.backBarButtonItem?.title = nil
         self.navigationItem.title = self.channelName
         self.url = NSURL(string: self.channelURL)!
-        self.tableView.separatorStyle = .None
+        self.tableView.separatorStyle = .none
         
         addGradientBackground()
         
         let indicator:UIActivityIndicatorView = UIActivityIndicatorView()
-        indicator.color = UIColor.blackColor()
+        indicator.color = UIColor.black
         indicator.center = self.view.center
         self.tableView.backgroundView!.addSubview(indicator)
         indicator.startAnimating()
        
         let overlay = UIView()
         overlay.frame = self.view.bounds
-        overlay.backgroundColor = UIColor.blackColor()
+        overlay.backgroundColor = UIColor.black
         overlay.alpha = 0.3
         self.tableView.backgroundView!.addSubview(overlay)
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+        DispatchQueue.main.async(execute: {
             
-            self.loadRSS(self.url)
+            self.loadRSS(self.url as URL)
 
-            dispatch_sync(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 
                 self.tableView.rowHeight = UITableViewAutomaticDimension
                 self.tableView.estimatedRowHeight = 70
                 self.tableView.dataSource = self
                 self.tableView.delegate = self
-                self.tableView.separatorStyle = .SingleLine
+                self.tableView.separatorStyle = .singleLine
                 self.tableView.reloadData()
                 indicator.stopAnimating()
                 overlay.removeFromSuperview()
@@ -68,7 +68,7 @@ class TableViewController: UITableViewController, NSXMLParserDelegate {
         
     }
     
-    func loadRSS(data: NSURL) {
+    func loadRSS(_ data: URL) {
         
         let myParser: XmlParserManager = XmlParserManager().initWithURL(data) as! XmlParserManager
         self.newFeed = myParser.feeds
@@ -78,8 +78,8 @@ class TableViewController: UITableViewController, NSXMLParserDelegate {
         
         let backgroundView = UIView()
         let background = CAGradientLayer().turquoiseColor()
-        let deviceScale = UIScreen.mainScreen().scale
-        background.frame = CGRectMake(0.0, 0.0, view.frame.size.width * deviceScale, view.frame.size.height * deviceScale)
+        let deviceScale = UIScreen.main.scale
+        background.frame = CGRect(x: 0.0, y: 0.0, width: view.frame.size.width * deviceScale, height: view.frame.size.height * deviceScale)
         backgroundView.layer.insertSublayer(background, above: nil)
         self.tableView.backgroundView = backgroundView
     }
@@ -88,32 +88,32 @@ class TableViewController: UITableViewController, NSXMLParserDelegate {
         super.didReceiveMemoryWarning()
     }
     
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
         cell.alpha = 0
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
+        UIView.animate(withDuration: 0.5, animations: { () -> Void in
             cell.alpha = 1
         })
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "openPage" {
             
             var selectedSpecialCaseContent = String()
             
-            let indexPath: NSIndexPath = self.tableView.indexPathForSelectedRow!
-            let selectedFTitle: String = newFeed[indexPath.row].objectForKey("title") as! String
-            let selectedFContent: String = newFeed[indexPath.row].objectForKey("description") as! String
-            let selectedURL: String = newFeed[indexPath.row].objectForKey("link") as! String
-            let selectedImage: String = newFeed[indexPath.row].objectForKey("enclosure") as! String
-            let selectedPubDate: String = newFeed[indexPath.row].objectForKey("pubDate") as! String
+            let indexPath: IndexPath = self.tableView.indexPathForSelectedRow!
+            let selectedFTitle: String = (newFeed[(indexPath as NSIndexPath).row] as AnyObject).object(forKey: "title") as! String
+            let selectedFContent: String = (newFeed[(indexPath as NSIndexPath).row] as AnyObject).object(forKey: "description") as! String
+            let selectedURL: String = (newFeed[(indexPath as NSIndexPath).row] as AnyObject).object(forKey: "link") as! String
+            let selectedImage: String = (newFeed[(indexPath as NSIndexPath).row] as AnyObject).object(forKey: "enclosure") as! String
+            let selectedPubDate: String = (newFeed[(indexPath as NSIndexPath).row] as AnyObject).object(forKey: "pubDate") as! String
             
             if channelName == "The Irrawaddy" || channelName == "Radio Free Asia (RFA)" || channelName == "DVB" || channelName == "Karen News" || channelName == "Popular News" {
-                selectedSpecialCaseContent = newFeed[indexPath.row].objectForKey("content:encoded") as! String
+                selectedSpecialCaseContent = (newFeed[(indexPath as NSIndexPath).row] as AnyObject).object(forKey: "content:encoded") as! String
             }
             
-            let fpvc: PageViewController = segue.destinationViewController as! PageViewController
+            let fpvc: PageViewController = segue.destination as! PageViewController
             
             fpvc.selectedFeedTitle = selectedFTitle
             fpvc.selectedFeedContent = selectedFContent
@@ -127,25 +127,25 @@ class TableViewController: UITableViewController, NSXMLParserDelegate {
         }
     }
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return newFeed.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
-        cell.backgroundColor = UIColor.clearColor()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as UITableViewCell
+        cell.backgroundColor = UIColor.clear
         
-        var removedExtraLineTitle = newFeed.objectAtIndex(indexPath.row).objectForKey("title") as? String
-            removedExtraLineTitle = removedExtraLineTitle?.stringByReplacingOccurrencesOfString("\n", withString: "")
+        var removedExtraLineTitle = (newFeed.object(at: (indexPath as NSIndexPath).row) as AnyObject).object(forKey: "title") as? String
+            removedExtraLineTitle = removedExtraLineTitle?.replacingOccurrences(of: "\n", with: "")
         
         cell.textLabel?.text = removedExtraLineTitle
         cell.textLabel?.font = UIFont(name:"Zawgyi-One", size:15)
-        cell.textLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        cell.textLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.sizeToFit()
         return cell

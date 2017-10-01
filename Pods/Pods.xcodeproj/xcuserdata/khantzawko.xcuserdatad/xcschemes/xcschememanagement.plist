@@ -9,10 +9,30 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-Burmese NewsTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-Burmese NewsUITests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>003710D67CDED70DC4E1D9E038C7B561</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>1480D48FC3D7ACF663D0945243F13D5B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A4F8F68D016A57E415699E339789EAE2</key>
 		<dict>
 			<key>primary</key>
 			<true/>

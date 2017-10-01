@@ -8,9 +8,9 @@
 
 import UIKit
 
-class XmlParserManager: NSObject, NSXMLParserDelegate {
+class XmlParserManager: NSObject, XMLParserDelegate {
     
-    var parser = NSXMLParser()
+    var parser = XMLParser()
     var feeds = NSMutableArray()
     var elements = NSMutableDictionary()
     var element = NSString()
@@ -23,14 +23,14 @@ class XmlParserManager: NSObject, NSXMLParserDelegate {
     var feedEnclosure = NSMutableString()
     
     // initilise parser
-    func initWithURL(url :NSURL) -> AnyObject {
+    func initWithURL(_ url :URL) -> AnyObject {
         startParse(url)
         return self
     }
     
-    func startParse(url :NSURL) {
+    func startParse(_ url :URL) {
         feeds = []
-        parser = NSXMLParser(contentsOfURL: url)!
+        parser = XMLParser(contentsOf: url)!
         parser.delegate = self
         parser.shouldProcessNamespaces = false
         parser.shouldReportNamespacePrefixes = false
@@ -42,10 +42,10 @@ class XmlParserManager: NSObject, NSXMLParserDelegate {
         return feeds
     }
     
-    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String: String]) {
-        element = elementName
+    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String: String]) {
+        element = elementName as NSString
         
-        if (element as NSString).isEqualToString("entry") || (element as NSString).isEqualToString("item"){
+        if (element as NSString).isEqual(to: "entry") || (element as NSString).isEqual(to: "item"){
             elements = NSMutableDictionary()
             elements = [:]
             ftitle = NSMutableString()
@@ -57,67 +57,67 @@ class XmlParserManager: NSObject, NSXMLParserDelegate {
             fdate = NSMutableString()
         }
         
-        if element.isEqualToString("enclosure") {
+        if element.isEqual(to: "enclosure") {
             let imgLink: String = attributeDict["url"]!
-            feedEnclosure.appendString(imgLink)
+            feedEnclosure.append(imgLink)
         } else {
-            feedEnclosure.appendString("\n")
+            feedEnclosure.append("\n")
         }
         
-        if element.isEqualToString("link") {
+        if element.isEqual(to: "link") {
             if attributeDict["rel"] == "alternate" {
                 let alternatelink: String = attributeDict["href"]!
-                link.appendString(alternatelink)
+                link.append(alternatelink)
             }
         }
         
     }
 
     
-    func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         
-        if (elementName as NSString).isEqualToString("entry") || (elementName as NSString).isEqualToString("item"){
+        if (elementName as NSString).isEqual(to: "entry") || (elementName as NSString).isEqual(to: "item"){
             if ftitle != "" {
-                elements.setObject(ftitle, forKey: "title")
+                elements.setObject(ftitle, forKey: "title" as NSCopying)
             }
             
             if link != "" {
-                elements.setObject(link, forKey: "link")
+                elements.setObject(link, forKey: "link" as NSCopying)
             }
             
             if fdescription != "" {
-                elements.setObject(fdescription, forKey: "description")
+                elements.setObject(fdescription, forKey: "description" as NSCopying)
             }
             
             if fspecialDescription != "" {
-                elements.setObject(fspecialDescription, forKey: "content:encoded")
+                elements.setObject(fspecialDescription, forKey: "content:encoded" as NSCopying)
             }
             
             if feedEnclosure != "" {
-                elements.setObject(feedEnclosure, forKey: "enclosure")
+                elements.setObject(feedEnclosure, forKey: "enclosure" as NSCopying)
             }
             
             if fdate != "" {
-                elements.setObject(fdate, forKey: "pubDate")
+                elements.setObject(fdate, forKey: "pubDate" as NSCopying)
             }
 
-            feeds.addObject(elements)
+            feeds.add(elements)
         }
         
     }
     
-    func parser(parser: NSXMLParser, foundCharacters string: String) {
+    func parser(_ parser: XMLParser, foundCharacters string: String) {
         
-        if element.isEqualToString("title") {
-            ftitle.appendString(string)
-        } else if element.isEqualToString("link") {
-            link.appendString(string)
-        } else if element.isEqualToString("description") || element.isEqualToString("content") || element.isEqualToString("summary") {
-            fdescription.appendString(string)
-        } else if element.isEqualToString("content:encoded"){
-            fspecialDescription.appendString(string)
-        } else if element.isEqualToString("pubDate") || element.isEqualToString("dc:date") || element.isEqualToString("published")  {
-            fdate.appendString(string)
+        if element.isEqual(to: "title") {
+            ftitle.append(string)
+        } else if element.isEqual(to: "link") {
+            link.append(string)
+        } else if element.isEqual(to: "description") || element.isEqual(to: "content") || element.isEqual(to: "summary") {
+            fdescription.append(string)
+        } else if element.isEqual(to: "content:encoded"){
+            fspecialDescription.append(string)
+        } else if element.isEqual(to: "pubDate") || element.isEqual(to: "dc:date") || element.isEqual(to: "published")  {
+            fdate.append(string)
         }
     }
 

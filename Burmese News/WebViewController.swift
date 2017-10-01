@@ -14,31 +14,31 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     
     var feedURL = ""
     
-    func webViewDidStartLoad(webView: UIWebView) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    func webViewDidStartLoad(_ webView: UIWebView) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }
     
-    func webViewDidFinishLoad(webView: UIWebView) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
     
-    func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+    func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         let tracker = GAI.sharedInstance().defaultTracker
-        tracker.set(kGAIScreenName, value: "Web View")
+        tracker?.set(kGAIScreenName, value: "Web View")
         
-        let builder = GAIDictionaryBuilder.createScreenView()
-        tracker.send(builder.build() as [NSObject : AnyObject])
+        let builder: NSObject = GAIDictionaryBuilder.createScreenView().build()
+        tracker?.send(builder as! [NSObject : AnyObject])
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()        
-        feedWebView = UIWebView(frame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height))
+        feedWebView = UIWebView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
         feedWebView.scalesPageToFit = true
-        feedWebView.loadRequest(NSURLRequest(URL: NSURL(string: feedURL)!))
+        feedWebView.loadRequest(URLRequest(url: URL(string: feedURL)!))
         self.view = self.feedWebView
     }
     
